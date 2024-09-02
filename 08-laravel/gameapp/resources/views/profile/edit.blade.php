@@ -155,4 +155,15 @@
             });
         });
     </script>
+    <script>
+        // Script para el menú hamburguesa
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('header').addEventListener('click', function(event) {
+                if (event.target.closest('.btn-burger')) {
+                    document.querySelector('.btn-burger').classList.toggle('active');
+                    document.querySelector('.nav').classList.toggle('active');
+                }
+            });
+        });
+    </script>
 @endsection

@@ -101,7 +101,7 @@ class UserController extends Controller
 
         $user->save();
 
-        return redirect()->route('users.index')->with('success', 'Usuario actualizado exitosamente.');
+        return redirect()->route('users.index')->with('success', 'Usuario ' . $user->fullname . ' actualizado exitosamente.');
     }
 
     // ====================
@@ -110,12 +110,11 @@ class UserController extends Controller
     public function search(Request $request)
     {
         $query = $request->input('query');
-        $users = User::where('fullname', 'LIKE', "%{$query}%")
-            ->orWhere('email', 'LIKE', "%{$query}%")
-            ->orWhere('role', 'LIKE', "%{$query}%")
-            ->get();
+        $users = User::where('fullname', 'LIKE', "%{$query}%")->get();
 
-        return view('users.partials.user_list', compact('users'));
+        $html = view('users.partials.user_list', compact('users'))->render();
+
+        return response()->json(['html' => $html]);
     }
 
     // ====================

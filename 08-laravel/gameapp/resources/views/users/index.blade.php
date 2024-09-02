@@ -22,6 +22,14 @@
     </header>
 
     <section class="scroll">
+        <!-- Mostrar mensaje de éxito -->
+        @if (session('success'))
+            <div class="alert alert-success" id="success-message"
+                style="position: absolute; top: 200px; left: 50%; transform: translateX(-50%); z-index: 1000; text-align: center; width: 330px; display: none;">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <!-- Caja de búsqueda -->
         <div class="search-box">
             <input id="qsearch" type="text" placeholder="Buscar">
@@ -41,50 +49,7 @@
 
         <!-- Lista de usuarios -->
         <div id="list">
-            <section class="contenedor_modulos_dash">
-                @foreach ($users as $user)
-                    <section class="contenedor_dash">
-                        <section class="contenido_dash">
-                            <!-- Contenedor para la imagen de perfil en miniatura -->
-                            <div class="img_perfil_miniatura">
-                                <img class="img_perfil_usuario_miniatura"
-                                    src="{{ $user->photo ? asset('images/' . $user->photo) : asset('images/no-photo.png') }}"
-                                    alt="User Thumbnail">
-                            </div>
-                            <!-- Texto del contenedor de usuario -->
-                            <div class="texto-contenedor-dash">
-                                <div class="titulo_modulo">
-                                    <h4>{{ $user->fullname }}</h4>
-                                </div>
-                                <div class="parrafo_modulo">
-                                    <p>{{ $user->role }}</p>
-                                </div>
-                            </div>
-                            <!-- Botón para ver editar e inabilitar usuarios -->
-                            <div class="contenedor-status {{ $user->status ? 'activo' : 'inactivo' }}">
-                                <p>{{ $user->status ? 'Activo' : 'Inactivo' }}</p> <!-- Estado del usuario -->
-                            </div>
-
-                            <div class="boton_view_dash">
-                                <!-- Botón de ver -->
-                                <a href="{{ route('users.show', $user->id) }}" class="btn btn-explore">
-                                    <i class="fa-regular fa-eye icon-white icon-thin"></i>
-                                </a>
-                                <!-- Botón de editar -->
-                                <a href="{{ route('users.edit', $user->id) }}" class="btn btn-edit">
-                                    <i class="fa-regular fa-pen-to-square icon-white icon-thin"></i>
-                                    <!-- Icono de editar -->
-                                </a>
-                                <!-- Botón de deshabilitar usuario -->
-                                <a href="{{ route('users.disable', $user->id) }}" class="btn btn-status">
-                                    <i class="fa-solid fa-user-slash icon-white icon-thin"></i>
-                                    <!-- Icono de deshabilitar -->
-                                </a>
-                            </div>
-                        </section>
-                    </section>
-                @endforeach
-            </section>
+            @include('users.partials.user_list', ['users' => $users])
         </div>
     </section>
 @endsection
@@ -108,12 +73,24 @@
                 var query = $(this).val();
                 var token = '{{ csrf_token() }}';
 
-                $.post('/users/search', {
-                    query: query,
-                    _token: token
-                }, function(data) {
-                    $('#list').html(data);
+                $.ajax({
+                    url: '{{ route('users.search') }}',
+                    method: 'POST',
+                    data: {
+                        query: query,
+                        _token: token
+                    },
+                    success: function(data) {
+                        $('#list').html(data.html);
+                    }
                 });
+            });
+
+            // Mostrar y ocultar el mensaje de éxito de manera suave
+            $('#success-message').fadeIn('slow', function() {
+                setTimeout(function() {
+                    $('#success-message').fadeOut('slow');
+                }, 3000);
             });
         });
     </script>

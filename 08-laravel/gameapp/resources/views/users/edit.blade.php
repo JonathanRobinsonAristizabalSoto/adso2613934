@@ -22,6 +22,7 @@
     </header>
 
     <section class="scroll">
+        <!-- Formulario de edición de usuario -->
         <form action="{{ route('users.update', $user->id) }}" method="POST" enctype="multipart/form-data"
             class="contenedor_titulos_cajas_register">
             @csrf
@@ -145,6 +146,17 @@
             // Permitir al usuario seleccionar una imagen al hacer clic en cualquier parte del contenedor
             $('#imagenContenedor').click(function() {
                 $('#inputFile').click();
+            });
+        });
+    </script>
+    <script>
+        // Script para el menú hamburguesa
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('header').addEventListener('click', function(event) {
+                if (event.target.closest('.btn-burger')) {
+                    document.querySelector('.btn-burger').classList.toggle('active');
+                    document.querySelector('.nav').classList.toggle('active');
+                }
             });
         });
     </script>
