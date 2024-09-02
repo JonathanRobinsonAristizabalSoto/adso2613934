@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <link rel="stylesheet" href="css/fonts.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+</head>
+
+<body>
+    <main class="cuerpo">
+        <header>
+            <img src="./images/logo-cabecera.svg" alt="Logo">
+        </header>
+        <section class="slider owl-carousel owl-theme">
+            <img class="item" src="images/slide01.png" alt="Slide01">
+            <img class="item" src="images/slide01.png" alt="Slide02">
+            <img class="item" src="images/slide01.png" alt="Slide03">
+        </section>
+        <footer>
+            <a href="./pages/catalogue.html" class="btn btn-explore">
+                <img class="content-btn-footer" src="images/content-btn-footer.svg" ="explore">
+            </a>
+        </footer>
+    </main>
+
+    <script src="js/jquery-3.7.1.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    
+    <Script>
+        $('.owl-carousel').owlCarousel({
+            loop: true,
+            margin: 10,
+            nav: true,
+            dots:false,
+            responsive: {
+                0: {
+                    items: 1
+                }
+            }
+        })
+    </Script>
+</body>
+
+</html>
