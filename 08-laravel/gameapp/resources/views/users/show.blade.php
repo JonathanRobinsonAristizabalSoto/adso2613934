@@ -11,7 +11,7 @@
             <a href="{{ url('users') }}">
                 <img class="icoback-users" src="{{ asset('images/btn_back.png') }}" alt="Back Button">
             </a>
-            <img class="logotitulo-users" src="{{ asset('images/logo_user_show.svg') }}" alt="Logo">
+            <img class="logotitulo-show" src="{{ asset('images/logo_show.svg') }}" alt="Logo">
             @include('includes.burger-menu')
         </section>
     </header>

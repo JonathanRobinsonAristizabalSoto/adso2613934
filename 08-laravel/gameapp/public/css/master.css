@@ -433,12 +433,36 @@ main.cuerpo {
         padding: 0px 0px 0px 20px;
     }
 
+    .logotitulo-edit {
+        padding: 0px 150px 0px 90px;
+    }
+
     .logotitulo-users {
         padding: 0px 50px 0px 70px;
     }
 
+    .logotitulo-user {
+        padding: 0px 20px 0px 40px;
+    }
+
+    .logotitulo-status {
+        padding: 0px 40px 0px 60px;
+    }
+
+    .logotitulo-delete {
+        padding: 0px 120px 0px 60px;
+    }
+
     .logotitulo-gamer {
-        padding: 0px 40px 0px 70px;
+        padding: 0px 100px 0px 70px;
+    }
+
+    .logotitulo-gamers {
+        padding: 0px 40px 0px 90px;
+    }
+
+    .logotitulo-show {
+        padding: 0px 40px 0px 90px;
     }
 
     .logotitulo-add {
@@ -1388,15 +1412,15 @@ main.cuerpo {
         font-family: var(--ff-body);
     }
 
-    .titulo_fullname {
+    .titulo_email {
         text-align: center;
-        color: var(--cian);
-        font-size: 1.2rem;
-        font-weight: 400;
+        color: var(--blanco);
+        font-size: 1rem;
+        font-weight: 300;
         font-family: var(--ff-body);
     }
 
-    .titulo_email {
+    .titulo_user {
         text-align: center;
         color: var(--blanco);
         font-size: 1rem;
@@ -1412,7 +1436,7 @@ main.cuerpo {
         font-weight: 300;
         font-family: var(--ff-body);
         background-color: var(--magenta);
-        width: 100px;
+        width: 200px;
         margin: 0 auto;
         border-radius: 20px;
         margin-top: 10px;
@@ -1482,7 +1506,36 @@ main.cuerpo {
         font-weight: 300;
         font-family: var(--ff-body);
         border: solid 1px var(--cian);
-        width: 170px;
+        width: 200px;
+        margin: 0; /* Eliminar margen automático */
+        border-radius: 20px;
+        margin-top: 5px; /* Espacio reducido en la parte superior */
+    }
+}
+
+.subcontenedor_show_grillgames {
+    display: grid;
+    grid-template-columns: repeat(
+        1,
+        auto
+    ); /* 1 columnas con ancho automático */
+    column-gap: 10px; /* Espacio mínimo entre las columnas */
+    row-gap: 1px; /* Espacio mínimo entre las filas */
+    justify-content: center; /* Centrar las columnas horizontalmente */
+    margin-top: 20px;
+    width: fit-content; /* Ajustar el ancho del contenedor al contenido */
+    margin-left: auto; /* Centrar el contenedor horizontalmente */
+    margin-right: auto; /* Centrar el contenedor horizontalmente */
+
+    p {
+        text-align: center;
+        color: var(--blanco);
+        font-size: 1rem;
+        padding: 3px;
+        font-weight: 300;
+        font-family: var(--ff-body);
+        border: solid 1px var(--cian);
+        width: 250px;
         margin: 0; /* Eliminar margen automático */
         border-radius: 20px;
         margin-top: 5px; /* Espacio reducido en la parte superior */

@@ -12,7 +12,7 @@
                 <a href="{{ route('categories.index') }}">
                     <img class="icoback-add" src="{{ asset('images/btn_back.png') }}" alt="Back Button">
                 </a>
-                <img class="logotitulo" src="{{ asset('images/logo-cabecera_add.svg') }}" alt="Logo">
+                <img class="logotitulo-add" src="{{ asset('images/logo-cabecera_add.svg') }}" alt="Logo">
             </div>
             <!-- Menú hamburguesa -->
             @include('includes.burger-menu')

@@ -10,7 +10,7 @@
                 <a href="{{ url('games') }}">
                     <img class="icoback-add" src="{{ asset('images/btn_back.png') }}" alt="Back Button">
                 </a>
-                <img class="logotitulo" src="{{ asset('images/logo-cabecera_add.svg') }}" alt="Logo">
+                <img class="logotitulo-add" src="{{ asset('images/logo-cabecera_add.svg') }}" alt="Logo">
             </div>
             <!-- Menú hamburguesa -->
             <div class="burger-menu">

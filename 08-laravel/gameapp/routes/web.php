@@ -90,6 +90,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/{game}/edit', [GameController::class, 'edit'])->name('games.edit');
         Route::put('/{game}', [GameController::class, 'update'])->name('games.update');
         Route::delete('/{game}', [GameController::class, 'destroy'])->name('games.destroy');
+        Route::post('/search', [GameController::class, 'search'])->name('games.search'); // Ruta de búsqueda
+        Route::get('/{game}/delete', [GameController::class, 'delete'])->name('games.delete'); // Ruta de eliminación corregida
     });
 });
 

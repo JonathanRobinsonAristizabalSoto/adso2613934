@@ -10,7 +10,7 @@
             <a href="{{ route('dashboard') }}">
                 <img class="icoback-gamer" src="{{ asset('images/btn_back.png') }}" alt="Back Button">
             </a>
-            <img class="logotitulo-gamer" src="{{ asset('images/logo-cabecera_games.svg') }}" alt="Logo">
+            <img class="logotitulo-gamers" src="{{ asset('images/logo-cabecera_games.svg') }}" alt="Logo">
 
             <!-- Incluir Menú hamburguesa -->
             @include('includes.burger-menu')
@@ -18,11 +18,21 @@
     </header>
 
     <section class="scroll">
+
+        <!-- Mensajes de éxito y error -->
+        @if (session('success'))
+            <div class="alert alert-success" id="success-message"
+                style="position: absolute; top: 200px; left: 50%; transform: translateX(-50%); z-index: 1000; text-align: center; width: 330px; display: none;">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <!-- caja de busqueda -->
         <div class="search-box">
-            <input type="text" placeholder="Buscar">
-            <i class="fas fa-filter filter-icon icon-white icon-thin"></i>
+            <input type="text" id="qsearch" placeholder="Buscar">
+            <i class="fas fa-filter filter-icon"></i>
         </div>
+
         <!-- boton add -->
         <div class="botonuser">
             <form action="{{ route('games.create') }}">
@@ -33,42 +43,8 @@
         </div>
 
         <!-- contenido games -->
-        <section class="contenedor_modulos_dash">
-            @foreach ($games as $game)
-                <section class="contenedor_dash">
-                    <section class="contenido_dash">
-
-                        <!-- Contenedor para la imagen de games en miniatura -->
-                        <div class="img_perfil_miniatura">
-                            <img src="{{ asset('storage/' . $game->image) }}" alt="Game Image" class="img-contenedor-dash">
-                        </div>
-                        <div class="texto-contenedor-dash">
-                            <div class="titulo_modulo">
-                                <p>{{ $game->title }}</p>
-                            </div>
-                            <div class="parrafo_modulo">
-                                <p>{{ $game->category->manufacturer }}</p>
-                            </div>
-                        </div>
-
-                        <!-- Botónes para ver editar y borrar games -->
-                        <div class="boton_view_dash">
-                            <!-- Botón de ver -->
-                            <a href="{{ route('games.show', $game->id) }}" class="btn btn-explore">
-                                <i class="fa-regular fa-eye icon-white icon-thin"></i>
-                            </a>
-                            <!-- Botón de editar -->
-                            <a href="{{ route('games.edit', $game->id) }}" class="btn btn-edit">
-                                <i class="fa-regular fa-pen-to-square icon-white icon-thin"></i> <!-- Icono de editar -->
-                            </a>
-                            <!-- Botón de eliminar -->
-                            <a href="{{ route('games.destroy', $game->id) }}" class="btn btn-delete">
-                                <i class="fa-regular fa-trash-can icon-white icon-thin"></i></i> <!-- Icono de eliminar -->
-                            </a>
-                        </div>
-                    </section>
-                </section>
-            @endforeach
+        <section class="contenedor_modulos_dash" id="list">
+            @include('games.partials.game_list', ['games' => $games])
         </section>
     </section>
 @endsection
@@ -79,6 +55,46 @@
             $(this).toggleClass('active');
             $('.nav').toggleClass('active');
             $('.contenido_menu').toggleClass('oculto');
+        });
+
+        // Script para búsqueda en tiempo real
+        $(document).ready(function() {
+            $('body').on('keyup', '#qsearch', function(e) {
+                e.preventDefault();
+                var query = $(this).val();
+                var token = '{{ csrf_token() }}';
+
+                if (query === '') {
+                    // Si el campo de búsqueda está vacío, recargar todos los juegos
+                    $.ajax({
+                        url: '{{ route('games.index') }}',
+                        method: 'GET',
+                        success: function(data) {
+                            $('#list').html($(data).find('#list').html());
+                        }
+                    });
+                } else {
+                    // Si hay una consulta, realizar la búsqueda
+                    $.ajax({
+                        url: '{{ route('games.search') }}',
+                        method: 'POST',
+                        data: {
+                            query: query,
+                            _token: token
+                        },
+                        success: function(data) {
+                            $('#list').html(data.html);
+                        }
+                    });
+                }
+            });
+
+            // Mostrar y ocultar el mensaje de éxito de manera suave
+            $('#success-message').fadeIn('slow', function() {
+                setTimeout(function() {
+                    $('#success-message').fadeOut('slow');
+                }, 3000);
+            });
         });
     </script>
 @endsection

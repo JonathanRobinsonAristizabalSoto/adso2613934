@@ -11,7 +11,7 @@
             <a href="{{ route('categories.index') }}">
                 <img class="icoback-dash" src="{{ asset('images/btn_back.png') }}" alt="Back Button">
             </a>
-            <img class="logotitulo-dash" src="{{ asset('images/logo-cabecera_categories.svg') }}" alt="Logo">
+            <img class="logotitulo-delete" src="{{ asset('images/logotitulo-delete.svg') }}" alt="Logo">
         </section>
     </header>
 

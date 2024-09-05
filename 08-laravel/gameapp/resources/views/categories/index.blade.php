@@ -24,14 +24,9 @@
 
         <!-- Mensajes de éxito y error -->
         @if (session('success'))
-            <div class="alert alert-success" id="success-message">
+            <div class="alert alert-success" id="success-message"
+                style="position: absolute; top: 200px; left: 50%; transform: translateX(-50%); z-index: 1000; text-align: center; width: 330px; display: none;">
                 {{ session('success') }}
-            </div>
-        @endif
-
-        @if (session('error'))
-            <div class="alert alert-danger">
-                {{ session('error') }}
             </div>
         @endif
 

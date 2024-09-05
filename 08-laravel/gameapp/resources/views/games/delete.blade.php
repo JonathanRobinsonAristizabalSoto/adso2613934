@@ -1,32 +1,39 @@
-{{-- Ubicación: gameapp/resources/views/categories/delete.blade.php --}}
+{{-- Ubicación: gameapp/resources/views/games/delete.blade.php --}}
 
 @extends('layouts.plantilla2')
 
-@section('title', 'Delete Category')
+@section('title', 'Delete Game')
 @section('class', 'cuerpo')
 
 @section('content')
     <header>
-        <section class="cabecera_categories">
-            <a href="{{ route('categories.index') }}">
-                <img class="icoback-dash" src="{{ asset('images/btn_back.png') }}" alt="Back Button">
+        <section class="cabecera_gamer">
+            <a href="{{ route('games.index') }}">
+                <img class="icoback-gamer" src="{{ asset('images/btn_back.png') }}" alt="Back Button">
             </a>
-            <img class="logotitulo-dash" src="{{ asset('images/logo-cabecera_categories.svg') }}" alt="Logo">
+            <img class="logotitulo-gamer" src="{{ asset('images/logo-cabecera_games.svg') }}" alt="Logo">
         </section>
     </header>
 
     <section class="scroll">
-        <div class="delete-confirmation">
-            <h1>¿Estás seguro de que deseas eliminar esta categoría?</h1>
-            <p>Nombre: {{ $category->name }}</p>
-            <p>Fabricante: {{ $category->manufacturer }}</p>
+        <div class="container disable-container">
+            <h2>Eliminar Juego</h2>
+            <p>¿Estás seguro de que deseas eliminar este juego?</p>
+            <p>
+                Título: <span class="highlight">{{ $game->title }}</span>
+                Desarrollador: <span class="highlight">{{ $game->developer }}</span>.
+            </p>
+            <p>
+                Este juego fue creado por el administrador: <span class="highlight">{{ $game->user->fullname ?? 'N/A' }}</span>.
+            </p>
 
-            <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
+            <form action="{{ route('games.destroy', $game->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-danger">Eliminar</button>
-                <a href="{{ route('categories.index') }}" class="btn btn-secondary">Cancelar</a>
+                <button type="submit" class="btn btn-status">Eliminar</button>
+                <a href="{{ route('games.index') }}" class="btn btn-secondary-status">Cancelar</a>
             </form>
         </div>
     </section>
+
 @endsection
