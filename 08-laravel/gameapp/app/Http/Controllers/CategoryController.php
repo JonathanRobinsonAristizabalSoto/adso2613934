@@ -16,7 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('categories.categories', compact('categories'));
+        return view('categories.index', compact('categories'));
     }
 
     // ------------------------------------------------------------------------------------
@@ -42,20 +42,25 @@ class CategoryController extends Controller
     public function store(CategoryRequest $request)
     {
         // Manejar la carga de la imagen
-        $imagePath = $request->file('image') ? $request->file('image')->store('images', 'public') : 'images/no-photo.png';
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '_' . $image->getClientOriginalName();
+            $image->move(public_path('images'), $imageName);
+        } else {
+            $imageName = 'no-photo.png';
+        }
 
         // Crear la nueva categoría
         $category = Category::create([
             'name' => $request->name,
             'manufacturer' => $request->manufacturer,
             'releasedate' => $request->releasedate,
-            'image' => $imagePath,
+            'image' => $imageName, // Guardar solo el nombre del archivo
             'description' => $request->description ?? '',
         ]);
 
         return redirect()->route('categories.index')->with('success', 'Categoría creada exitosamente.');
     }
-
     // ------------------------------------------------------------------------------------
 
     /**
@@ -71,8 +76,9 @@ class CategoryController extends Controller
 
     // ------------------------------------------------------------------------------------
 
+
     /**
-     * Actualiza una categoría existente en la base de datos.
+     * Actualiza la categoría especificada en la base de datos.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Category  $category
@@ -80,30 +86,33 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
+        // Validar los datos del formulario
         $request->validate([
             'name' => 'required|string|max:255',
-            'manufacturer' => 'required|string|max:255',
-            'releasedate' => 'required|date',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $category->name = $request->name;
-        $category->manufacturer = $request->manufacturer;
-        $category->releasedate = $request->releasedate;
-        $category->description = $request->description;
-
+        // Manejar la carga de la nueva imagen
         if ($request->hasFile('image')) {
-            // Elimina la imagen anterior si existe
-            if ($category->image !== 'no-photo.png' && file_exists(public_path('images/' . $category->image))) {
-                unlink(public_path('images/' . $category->image));
-            }
-            $category->image = $request->file('image')->store('images', 'public');
+            // Obtener el archivo de imagen
+            $image = $request->file('image');
+            // Generar un nombre único para la imagen
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            // Mover la imagen al directorio public/images
+            $image->move(public_path('images'), $imageName);
+            // Actualizar el campo de imagen en la categoría
+            $category->image = $imageName;
         }
 
+        // Actualizar otros campos de la categoría
+        $category->name = $request->input('name');
+        $category->description = $request->input('description');
         $category->save();
 
-        return redirect()->route('categories.index')->with('success', 'Categoría actualizada exitosamente.');
+        // Redirigir a la vista de edición con un mensaje de éxito
+        return redirect()->route('categories.index', $category->id)
+            ->with('success', 'Categoría actualizada correctamente.');
     }
 
     // ------------------------------------------------------------------------------------
@@ -138,8 +147,10 @@ class CategoryController extends Controller
         $query = $request->input('query');
         $categories = Category::where('name', 'LIKE', "%$query%")->get();
 
-        // Devolver los resultados como JSON
-        return response()->json($categories);
+        // Devolver los resultados como HTML
+        $html = view('categories.partials.category_list', compact('categories'))->render();
+
+        return response()->json(['html' => $html]);
     }
 
     // ------------------------------------------------------------------------------------

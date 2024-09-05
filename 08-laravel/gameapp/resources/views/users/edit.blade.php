@@ -133,6 +133,7 @@
 @section('js')
     <script>
         $(document).ready(function() {
+            // Manejo de la selección y visualización de archivos de imagen
             $('#inputFile').on('change', function(event) {
                 var file = event.target.files[0];
                 var reader = new FileReader();
@@ -143,7 +144,7 @@
                 reader.readAsDataURL(file);
             });
 
-            // Permitir al usuario seleccionar una imagen al hacer clic en cualquier parte del contenedor
+            // Permitir la selección de una imagen al hacer clic en el contenedor
             $('#imagenContenedor').click(function() {
                 $('#inputFile').click();
             });

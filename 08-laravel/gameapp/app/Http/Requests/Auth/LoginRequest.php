@@ -12,7 +12,7 @@ use Illuminate\Validation\ValidationException;
 class LoginRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Determina si el usuario está autorizado para hacer esta solicitud.
      */
     public function authorize(): bool
     {
@@ -20,66 +20,88 @@ class LoginRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Obtiene las reglas de validación que se aplican a la solicitud.
      *
      * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+            'email' => ['required', 'string', 'email'], // El campo email es obligatorio y debe ser una dirección de correo válida
+            'password' => ['required', 'string', 'min:6'], // El campo contraseña es obligatorio y debe tener al menos 6 caracteres
         ];
     }
 
     /**
-     * Attempt to authenticate the request's credentials.
+     * Obtiene los mensajes de validación personalizados para la solicitud.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'email.required' => __('validation.custom.email.required'),
+            'email.email' => __('validation.custom.email.email'),
+            'password.required' => __('validation.custom.password.required'),
+            'password.min' => __('validation.custom.password.min'),
+        ];
+    }
+
+    /**
+     * Intenta autenticar las credenciales proporcionadas en la solicitud.
      *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function authenticate(): void
     {
+        // Verifica que el usuario no haya excedido el límite de intentos fallidos
         $this->ensureIsNotRateLimited();
 
+        // Intentar la autenticación con las credenciales proporcionadas
         if (! Auth::attempt($this->only('email', 'password'), $this->boolean('remember'))) {
+            // Incrementa el contador de intentos fallidos si la autenticación falla
             RateLimiter::hit($this->throttleKey());
 
+            // Lanza una excepción con un mensaje de error si la autenticación falla
             throw ValidationException::withMessages([
-                'email' => trans('auth.failed'),
+                'email' => 'Las credenciales ingresadas no coinciden con nuestros registros.', // Mensaje personalizado de error
             ]);
         }
 
+        // Restablece el contador de intentos fallidos si la autenticación es exitosa
         RateLimiter::clear($this->throttleKey());
     }
 
     /**
-     * Ensure the login request is not rate limited.
+     * Verifica que la solicitud de inicio de sesión no exceda el límite de intentos.
      *
      * @throws \Illuminate\Validation\ValidationException
      */
     public function ensureIsNotRateLimited(): void
     {
+        // Comprueba si el usuario ha superado el límite de intentos fallidos (5 intentos en este caso)
         if (! RateLimiter::tooManyAttempts($this->throttleKey(), 5)) {
             return;
         }
 
+        // Dispara un evento de bloqueo si se excede el límite
         event(new Lockout($this));
 
+        // Calcula los segundos restantes antes de que el usuario pueda intentar nuevamente
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
+        // Lanza una excepción con un mensaje que indica el tiempo de espera
         throw ValidationException::withMessages([
-            'email' => trans('auth.throttle', [
-                'seconds' => $seconds,
-                'minutes' => ceil($seconds / 60),
-            ]),
+            'email' => 'Demasiados intentos fallidos. Por favor intenta de nuevo en :seconds segundos o :minutes minutos.', // Mensaje personalizado de bloqueo
         ]);
     }
 
     /**
-     * Get the rate limiting throttle key for the request.
+     * Genera la clave única de limitación de intentos para la solicitud.
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('email')).'|'.$this->ip());
+        // Genera una clave única combinando el email en minúsculas y la IP del usuario
+        return Str::slug(Str::lower($this->string('email')).'|'.$this->ip());
     }
 }

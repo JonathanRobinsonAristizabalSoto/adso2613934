@@ -387,28 +387,22 @@ main.cuerpo {
     .botonuser {
         margin-top: 0px;
         margin-bottom: 20px;
-    }
-
-    .botonuser button {
-        cursor: pointer;
-        border: none;
-    }
-
-    .botonuser {
-        margin-top: 0px;
-        margin-bottom: 20px;
         button {
             cursor: pointer;
             border: none;
             outline: none;
             background: url(../images/btn3.png) no-repeat center;
             height: 60px;
-            width: 260px;
+            width: 280px;
             display: flex;
             justify-content: center;
             align-items: center;
             margin: auto;
+            color: var(--blanco);
         }
+
+        font-weight: 400;
+        font-size: 18px;
     }
 
     .boton_role {
@@ -720,7 +714,7 @@ main.cuerpo {
 
     /* ------------------------------------------------------------------------------------- */
 
-    /* Estilos para la caja de login*/
+    /* Estilos para la caja de login */
     .caja {
         margin: 0 auto;
         display: flex;
@@ -733,14 +727,12 @@ main.cuerpo {
         margin-bottom: 10px;
         position: relative;
         padding: 0 10px 0 10px;
+    }
 
-        .ico-eye {
-            cursor: pointer;
-            position: absolute;
-            right: 10px;
-        }
-
-
+    .caja .ico-eye {
+        cursor: pointer;
+        position: absolute;
+        right: 10px;
     }
 
     .caja input {
@@ -763,6 +755,61 @@ main.cuerpo {
         border: none;
         border-radius: 0 10px 10px 0;
         cursor: pointer;
+    }
+
+    .caja textarea {
+        flex: 1;
+        padding: 6px 0px 6px 0px;
+        border: none;
+        background: transparent;
+        font-family: var(--ff-body);
+        font-size: 15px;
+        font-weight: 400;
+        outline: none;
+        text-align: center;
+        color: var(--cian);
+        resize: none; /* Opcional: para evitar que el usuario cambie el tamaño del textarea */
+        width: 300px;
+        height: 150px;
+    }
+
+    .caja textarea::placeholder {
+        color: var(--cian);
+    }
+
+    /* Estilos para el input de archivo */
+    .inputfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+    .inputfile + .btn {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--cian);
+        display: inline-block;
+        padding: 10px 20px;
+        cursor: pointer;
+        border-radius: 5px;
+        background: transparent;
+        transition: color 0.3s, border-color 0.3s;
+    }
+
+    .inputfile:focus + .btn,
+    .inputfile + .btn:hover {
+        color: var(--magenta);
+    }
+
+    .file-name {
+        margin-left: 5px;
+        font-family: var(--ff-body);
+        font-size: 12px;
+        color: var(--blanco);
+        font-weight: 200;
     }
 
     /* --------------------------------------------------------------------------- */
@@ -977,45 +1024,41 @@ main.cuerpo {
     width: 80%;
     align-items: center;
     margin: 0 auto;
+
+    ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        margin-bottom: 10px;
+    }
+
+    p {
+        margin: 0;
+        font-weight: bold;
+    }
 }
 
-/* Estilo para la lista de errores */
-.alert ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-/* Estilo para cada elemento de la lista */
-.alert li {
-    margin-bottom: 10px;
-}
-
-/* Estilo para el mensaje de error (opcional) */
-.alert p {
-    margin: 0;
-    font-weight: bold;
-}
-
-/* contendor para imagenes usuario menu precargada */
-
+/* Contenedor para imágenes de usuario en el menú precargadas */
 .img_perfiles {
     position: relative;
-    width: 150px; /* Ajusta el tamaño según tus necesidades */
+    width: 150px;
     height: 150px;
-    border: 3px solid var(--cian); /* Ajusta el color del borde según tus necesidades */
+    border: 3px solid var(--cian);
     border-radius: 50%;
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     left: 125px;
-}
 
-.img_perfiles img.img_perfil_usuario {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+    img.img_perfil_usuario {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 }
 
 /* Contenedor principal de cada elemento de la lista */
@@ -1141,7 +1184,6 @@ main.cuerpo {
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
 }
-
 
 /* Estilos para la sección de confirmación de eliminación */
 .delete-confirmation {
@@ -1269,6 +1311,10 @@ main.cuerpo {
         font-weight: 400;
         color: var(--blanco);
     }
+
+    .highlight {
+        color: var(--cian);
+    }
 }
 
 .container-edit {
@@ -1331,10 +1377,10 @@ main.cuerpo {
     }
 }
 
-.subcontenedor_show{
+.subcontenedor_show {
     margin-top: 20px;
 
-    .titulo_fullname{
+    .titulo_fullname {
         text-align: center;
         color: var(--cian);
         font-size: 1.2rem;
@@ -1342,7 +1388,7 @@ main.cuerpo {
         font-family: var(--ff-body);
     }
 
-    .titulo_fullname{
+    .titulo_fullname {
         text-align: center;
         color: var(--cian);
         font-size: 1.2rem;
@@ -1350,7 +1396,7 @@ main.cuerpo {
         font-family: var(--ff-body);
     }
 
-    .titulo_email{
+    .titulo_email {
         text-align: center;
         color: var(--blanco);
         font-size: 1rem;
@@ -1358,7 +1404,7 @@ main.cuerpo {
         font-family: var(--ff-body);
     }
 
-    .titulo_role{
+    .titulo_role {
         text-align: center;
         color: var(--blanco);
         font-size: 1.2rem;
@@ -1373,21 +1419,24 @@ main.cuerpo {
     }
 }
 
-.status_dash{
+.status_dash {
     text-align: center;
-        color: var(--cian);
-        font-size: 1rem;
-        padding: 3px;
-        font-weight: 300;
-        font-family: var(--ff-title);
-        width: 100px;
-        margin: 0 auto;
-        margin-top: 10px;
+    color: var(--cian);
+    font-size: 1rem;
+    padding: 3px;
+    font-weight: 300;
+    font-family: var(--ff-title);
+    width: 100px;
+    margin: 0 auto;
+    margin-top: 10px;
 }
 
 .subcontenedor_show_grill {
     display: grid;
-    grid-template-columns: repeat(2, auto); /* Dos columnas con ancho automático */
+    grid-template-columns: repeat(
+        2,
+        auto
+    ); /* Dos columnas con ancho automático */
     column-gap: 10px; /* Espacio mínimo entre las columnas */
     row-gap: 1px; /* Espacio mínimo entre las filas */
     justify-content: center; /* Centrar las columnas horizontalmente */
@@ -1395,22 +1444,57 @@ main.cuerpo {
     width: fit-content; /* Ajustar el ancho del contenedor al contenido */
     margin-left: auto; /* Centrar el contenedor horizontalmente */
     margin-right: auto; /* Centrar el contenedor horizontalmente */
+
+    p {
+        text-align: center;
+        color: var(--blanco);
+        font-size: 1rem;
+        padding: 3px;
+        font-weight: 300;
+        font-family: var(--ff-body);
+        border: solid 1px var(--cian);
+        width: 170px;
+        margin: 0; /* Eliminar margen automático */
+        border-radius: 20px;
+        margin-top: 5px; /* Espacio reducido en la parte superior */
+    }
 }
 
-.subcontenedor_show_grill p {
+.subcontenedor_show_grillcategories {
+    display: grid;
+    grid-template-columns: repeat(
+        1,
+        auto
+    ); /* 1 columnas con ancho automático */
+    column-gap: 10px; /* Espacio mínimo entre las columnas */
+    row-gap: 1px; /* Espacio mínimo entre las filas */
+    justify-content: center; /* Centrar las columnas horizontalmente */
+    margin-top: 20px;
+    width: fit-content; /* Ajustar el ancho del contenedor al contenido */
+    margin-left: auto; /* Centrar el contenedor horizontalmente */
+    margin-right: auto; /* Centrar el contenedor horizontalmente */
+
+    p {
+        text-align: center;
+        color: var(--blanco);
+        font-size: 1rem;
+        padding: 3px;
+        font-weight: 300;
+        font-family: var(--ff-body);
+        border: solid 1px var(--cian);
+        width: 170px;
+        margin: 0; /* Eliminar margen automático */
+        border-radius: 20px;
+        margin-top: 5px; /* Espacio reducido en la parte superior */
+    }
+}
+
+.titulo_viewcategories {
+    font-family: var(--ff-title);
+    color: var(--cian);
+    margin-top: 30px;
     text-align: center;
-    color: var(--blanco);
-    font-size: 1rem;
-    padding: 3px;
-    font-weight: 300;
-    font-family: var(--ff-body);
-    border: solid 1px var(--cian);
-    width: 170px;
-    margin: 0; /* Eliminar margen automático */
-    border-radius: 20px;
-    margin-top: 5px; /* Espacio reducido en la parte superior */
 }
-
 
 .subcontenedor_edit {
     text-align: center;
@@ -1418,7 +1502,6 @@ main.cuerpo {
 
     .btn-edit {
         text-decoration: none;
-
 
         .btn-edit-button {
             width: 150px;
@@ -1482,7 +1565,9 @@ main.cuerpo {
 
             /* Cambiar el color de fondo del option al pasar el ratón sobre él */
             &:hover {
-                background-color: var(--cian); /* Fondo cian para la opción seleccionada */
+                background-color: var(
+                    --cian
+                ); /* Fondo cian para la opción seleccionada */
                 color: var(--morado); /* Color de la letra morado */
             }
         }
@@ -1490,7 +1575,7 @@ main.cuerpo {
 
     /* Agregar un ícono de flecha personalizado */
     &::after {
-        content: '\25BC'; /* Código Unicode para la flecha hacia abajo */
+        content: "\25BC"; /* Código Unicode para la flecha hacia abajo */
         position: absolute;
         right: 15px; /* Ubicación de la flecha */
         top: 50%;
@@ -1501,7 +1586,3 @@ main.cuerpo {
         z-index: 0; /* Asegura que la flecha esté debajo del select */
     }
 }
-
-
-
-

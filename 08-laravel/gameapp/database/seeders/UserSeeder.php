@@ -25,8 +25,8 @@ class UserSeeder extends Seeder
             'gender' => 'Male',
             'birthdate' => '1990-12-30', // Formato Y-m-d
             'phone' => '3187542709',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('admin'),
+            'email' => 'Admin@gmail.com',
+            'password' => Hash::make('Admin1234'),
             'role' => 'admin',
             'photo' => 'perfilm1.jpg', // Ruta de la foto sin 'images/'
         ]);
@@ -39,7 +39,7 @@ class UserSeeder extends Seeder
             'birthdate' => '1990-08-30', // Formato Y-m-d
             'phone' => '45321246',
             'email' => 'moderator@gmail.com',
-            'password' => Hash::make('admin'),
+            'password' => Hash::make('Moderator1234'),
             'role' => 'moderator',
             'photo' => 'perfilm3.jpg', // Ruta de la foto sin 'images/'
         ]);
@@ -52,7 +52,7 @@ class UserSeeder extends Seeder
             'birthdate' => '1990-07-15', // Formato Y-m-d
             'phone' => '3216549870',
             'email' => 'user@gmail.com',
-            'password' => Hash::make('user'),
+            'password' => Hash::make('User1234'),
             'role' => 'user',
             'photo' => 'perfilf1.jpg', // Ruta de la foto sin 'images/'
         ]);

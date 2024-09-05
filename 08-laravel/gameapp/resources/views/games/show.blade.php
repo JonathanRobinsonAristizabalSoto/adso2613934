@@ -17,17 +17,12 @@
 
     <section class="scroll">
         <div class="contenedor_titulos_parrafos_view">
-            <div class="img_perfiles">
-                <img class="img_perfil_usuario"
-                    src="{{ $category->image ? asset('images/' . $category->image) : asset('images/no-photo.png') }}"
-                    alt="Category Image">
-            </div>
-            <h1 class="titulo_viewcategories">{{ $category->name }}</h1>
-            <div class="subcontenedor_show_grillcategories">
-                <p class="parrafo_view">{{ $category->manufacturer }}</p>
-                <p class="parrafo_view">{{ $category->releasedate }}</p>
-                <p class="parrafo_view">{{ $category->description }}</p>
-            </div>
+            <img src="{{ $category->image ? asset('storage/' . $category->image) : asset('images/no-photo.png') }}" alt="Category Image">
+            <h1 class="titulo_view">{{ $category->name }}</h1>
+            <p class="parrafo_view">{{ $category->manufacturer }}</p>
+            <p class="parrafo_view">{{ $category->releasedate }}</p>
+            <p class="parrafo_view">{{ $category->description }}</p>
+
         </div>
     </section>
 @endsection

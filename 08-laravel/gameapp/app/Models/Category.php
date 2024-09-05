@@ -22,4 +22,10 @@ class Category extends Model
     {
         return $this->hasMany('App\Models\Game');
     }
+
+    // Relationship: Category has many users through games
+    public function users()
+    {
+        return $this->hasManyThrough('App\Models\User', 'App\Models\Game');
+    }
 }

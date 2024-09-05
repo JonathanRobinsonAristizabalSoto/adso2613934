@@ -18,6 +18,7 @@ class CategorySeeder extends Seeder
             'manufacturer' => 'Microsoft',
             'releasedate' => '2020-11-10',
             'description' => 'Lorem ipsum dolor sit amet',
+            'image' => 'XboxSeriesX.png',
         ]);
 
         Category::create([
@@ -25,6 +26,7 @@ class CategorySeeder extends Seeder
             'manufacturer' => 'Nintendo',
             'releasedate' => '2017-11-10',
             'description' => 'Lorem ipsum dolor sit amet',
+            'image' => 'Switch.png',
         ]);
 
         Category::create([
@@ -32,6 +34,7 @@ class CategorySeeder extends Seeder
             'manufacturer' => 'Sony',
             'releasedate' => '2020-11-12',
             'description' => 'Lorem ipsum dolor sit amet',
+            'image' => 'Ps5.png',
         ]);
     }
 }

@@ -30,10 +30,15 @@ Route::get('/dashboard', function () {
 // ====================
 // Rutas de autenticación
 // ====================
-Route::middleware(['web'])->group(function () {
+Route::middleware('web')->group(function () {
+    // Registro de usuario
     Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
     Route::post('/register', [RegisteredUserController::class, 'store']);
+
+    // Inicio de sesión
     Route::post('/login', [LoginController::class, 'login'])->name('login');
+
+    // Cierre de sesión
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 });
 
@@ -54,7 +59,7 @@ Route::middleware('auth')->group(function () {
     // ====================
     // Rutas de usuarios (CRUD)
     // ====================
-    Route::resource('users', UserController::class)->except(['destroy']);
+    Route::resource('users', UserController::class)->except(['destroy']); // Exceptuar eliminación si es necesario
     Route::post('/users/search', [UserController::class, 'search'])->name('users.search');
     Route::get('/users/{user}/disable', [UserController::class, 'disable'])->name('users.disable');
     Route::post('/users/{user}/disable', [UserController::class, 'toggleStatus'])->name('users.toggle-status');
@@ -84,7 +89,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/{game}', [GameController::class, 'show'])->name('games.show');
         Route::get('/{game}/edit', [GameController::class, 'edit'])->name('games.edit');
         Route::put('/{game}', [GameController::class, 'update'])->name('games.update');
-        Route::get('/{game}/delete', [GameController::class, 'delete'])->name('games.delete');
         Route::delete('/{game}', [GameController::class, 'destroy'])->name('games.destroy');
     });
 });

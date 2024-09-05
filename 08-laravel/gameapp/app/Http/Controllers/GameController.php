@@ -12,7 +12,7 @@ class GameController extends Controller
     {
         // Cargar la relación 'category' con los juegos
         $games = Game::with('category')->get();
-        return view('games.games', compact('games'));
+        return view('games.index', compact('games'));
     }
 
     // Mostrar el formulario para crear un nuevo juego

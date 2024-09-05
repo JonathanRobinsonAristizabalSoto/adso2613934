@@ -16,24 +16,17 @@
     </header>
 
     <section class="scroll">
-        <div class="container disable-container">
-            <h2>Eliminar Categoria</h2>
-            <p>¿Estás seguro de que deseas eliminar esta categoría?</p>
-            <p>
-                Nombre: <span class="highlight">{{ $category->name }}</span>
-                Fabricante: <span class="highlight">{{ $category->manufacturer }}</span>.
-            </p>
-            <p>
-                Esta categoría fue creada por el administrador: <span class="highlight">{{ $category->games->first()->user->fullname ?? 'N/A' }}</span>.
-            </p>
+        <div class="delete-confirmation">
+            <h1>¿Estás seguro de que deseas eliminar esta categoría?</h1>
+            <p>Nombre: {{ $category->name }}</p>
+            <p>Fabricante: {{ $category->manufacturer }}</p>
 
             <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="btn btn-status">Eliminar</button>
-                <a href="{{ route('categories.index') }}" class="btn btn-secondary-status">Cancelar</a>
+                <button type="submit" class="btn btn-danger">Eliminar</button>
+                <a href="{{ route('categories.index') }}" class="btn btn-secondary">Cancelar</a>
             </form>
         </div>
     </section>
-
 @endsection

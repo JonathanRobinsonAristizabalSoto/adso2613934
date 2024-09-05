@@ -10,6 +10,12 @@ use App\Http\Controllers\Controller;
 
 class LoginController extends Controller
 {
+    /**
+     * Maneja la autenticación del usuario.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function login(Request $request)
     {
         // Validar los datos del formulario de login
@@ -22,19 +28,32 @@ class LoginController extends Controller
         // Obtener las credenciales de la solicitud
         $credentials = $request->only('email', 'password');
 
-        // Intentar autenticar al usuario con la opción de recordar
-        if (Auth::attempt($credentials, $request->filled('remember'))) {
-            // Redirigir al dashboard si la autenticación es exitosa
-            return redirect()->intended('dashboard');
-        }
+        try {
+            // Intentar autenticar al usuario con la opción de recordar
+            if (Auth::attempt($credentials, $request->filled('remember'))) {
+                // Almacenar un mensaje flash en la sesión
+                return redirect()->route('dashboard')->with('success', 'Inicio de sesión exitoso.');
+            }
 
-        // Redirigir de vuelta con un mensaje de error si la autenticación falla
-        return redirect()->back()->withErrors([
-            'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
-        ])->withInput($request->except('password'));
+            // Redirigir de vuelta con un mensaje de error si la autenticación falla
+            return redirect()->back()->withErrors([
+                'email' => 'Las credenciales proporcionadas no coinciden con nuestros registros.',
+            ])->withInput($request->except('password'));
+
+        } catch (\Exception $e) {
+            // Manejar cualquier excepción inesperada
+            return redirect()->back()->withErrors([
+                'email' => 'Ocurrió un error inesperado. Por favor, inténtelo de nuevo más tarde.',
+            ])->withInput($request->except('password'));
+        }
     }
 
-    // Método para manejar el logout
+    /**
+     * Maneja el cierre de sesión del usuario.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function logout(Request $request)
     {
         // Cierra la sesión del usuario

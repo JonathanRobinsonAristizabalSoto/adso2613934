@@ -62,7 +62,7 @@
                                 <i class="fa-regular fa-pen-to-square icon-white icon-thin"></i> <!-- Icono de editar -->
                             </a>
                             <!-- Botón de eliminar -->
-                            <a href="{{ route('games.delete', $game->id) }}" class="btn btn-delete">
+                            <a href="{{ route('games.destroy', $game->id) }}" class="btn btn-delete">
                                 <i class="fa-regular fa-trash-can icon-white icon-thin"></i></i> <!-- Icono de eliminar -->
                             </a>
                         </div>
