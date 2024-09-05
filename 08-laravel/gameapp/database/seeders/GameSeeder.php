@@ -17,10 +17,10 @@ class GameSeeder extends Seeder
             'title' => 'Halo Infinite',
             'developer' => '343 Industries',
             'releasedate' => '2021-12-08',
-            'category_id' => 1, 
+            'category_id' => 1,
             'user_id' => 1,
             'price' => 59.99,
-            'genre' => 'shooter',
+            'genre' => 'Shooter',
             'description' => '¡Prepárate para la última entrega de la épica saga de Halo!',
         ]);
 
@@ -29,9 +29,9 @@ class GameSeeder extends Seeder
             'developer' => 'Nintendo EPD',
             'releasedate' => '2017-10-27',
             'category_id' => 2,
-            'user_id' => 1, 
+            'user_id' => 1,
             'price' => 59.99,
-            'genre' => 'plataformas',
+            'genre' => 'Arcade',
             'description' => 'Únete a Mario en una nueva aventura por diferentes mundos para salvar a la Princesa Peach de Bowser.',
         ]);
 
@@ -39,10 +39,10 @@ class GameSeeder extends Seeder
             'title' => 'Spider-Man: Miles Morales',
             'developer' => 'Insomniac Games',
             'releasedate' => '2020-11-12',
-            'category_id' => 3, 
-            'user_id' => 1, 
+            'category_id' => 3,
+            'user_id' => 1,
             'price' => 69.99,
-            'genre' => 'acción y aventura', 
+            'genre' => 'Acción y aventura',
             'description' => '¡Embárcate en una nueva aventura como Miles Morales en la ciudad de Nueva York!',
         ]);
     }

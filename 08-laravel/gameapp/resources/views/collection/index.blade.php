@@ -17,7 +17,7 @@
 
     <section class="contenedor_modulos_dash">
         @foreach ($categories as $categoryName => $games)
-            <h3>{{ $categoryName }}</h3> {{-- Categoría fuera del contenedor --}}
+            <h3 class="titulo-categoria-mycollection">{{ $categoryName }}</h3> {{-- Categoría fuera del contenedor --}}
 
             <section class="contenedor_dash">
                 @foreach ($games as $game)

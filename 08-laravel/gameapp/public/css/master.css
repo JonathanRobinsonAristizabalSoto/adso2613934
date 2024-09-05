@@ -1660,3 +1660,12 @@ main.cuerpo {
         z-index: 0; /* Asegura que la flecha esté debajo del select */
     }
 }
+
+.titulo-categoria-mycollection{
+    font-weight: 400;
+    font-family: var(--ff-title);
+    font-size: 1.5rem;
+    color: var(--blanco);
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

@@ -7,8 +7,8 @@
 
 @section('content')
     <header>
-        <section class="cabecera_dash">
-            <img class="logotitulo-dash" src="{{ asset('images/logo-cabecera_dashboard.svg') }}" alt="Logo">
+        <section class="cabecera_mydash">
+            <img class="logotitulo-mydash" src="{{ asset('images/logotitulo-mydash.svg') }}" alt="Logo">
 
             {{-- Menú hamburguesa --}}
             @include('includes.burger-menu-user')
@@ -53,7 +53,7 @@
                 <img src="{{ asset('images/ico-mycollection.png') }}" alt="Ícono de colección" class="img-contenedor-dash">
                 <div class="texto-contenedor-dash">
                     <div class="parrafo_modulo">
-                        <h3>Collection</h3>
+                        <h3>My collection</h3>
                     </div>
                 </div>
                 <div class="boton_view_dash">
