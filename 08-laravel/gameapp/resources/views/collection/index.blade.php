@@ -7,8 +7,8 @@
 
 @section('content')
     <header>
-        <section class="cabecera_dash">
-            <img class="logotitulo-dash" src="{{ asset('images/logo-cabecera_dashboard.svg') }}" alt="Logo">
+        <section class="cabecera_mydash">
+            <img class="logotitulo-mydash" src="{{ asset('images/logotitulo-mydash.svg') }}" alt="Logo">
 
             {{-- Menú hamburguesa --}}
             @include('includes.burger-menu')
@@ -16,28 +16,36 @@
     </header>
 
     <section class="contenedor_modulos_dash">
-        <h2>My Collection</h2>
+        @foreach ($categories as $categoryName => $games)
+            <h3>{{ $categoryName }}</h3> {{-- Categoría fuera del contenedor --}}
 
-        @foreach($categories as $categoryName => $games)
             <section class="contenedor_dash">
-                <section class="contenido_dash">
-                    <img src="{{ asset('images/ico-category.png') }}" alt="Ícono de categoría" class="img-contenedor-dash">
-                    <div class="texto-contenedor-dash">
-                        <div class="parrafo_modulo">
-                            <h3>{{ $categoryName }}</h3>
-                        </div>
-                    </div>
-                </section>
-
-                @foreach($games as $game)
+                @foreach ($games as $game)
                     <section class="contenido_dash">
-                        <img src="{{ $game->image ? asset('storage/' . $game->image) : asset('images/no-image.png') }}" alt="Game Image" class="img-contenedor-dash">
+                        <!-- Contenedor para la imagen de games en miniatura -->
+                        <div class="img_perfil_miniatura">
+                            <img class="img_perfil_usuario_miniatura"
+                                src="{{ $game->image ? asset('images/' . $game->image) : asset('images/no-photo.png') }}"
+                                alt="category Thumbnail">
+                        </div>
                         <div class="texto-contenedor-dash">
-                            <div class="parrafo_modulo">
+                            <div class="titulo_modulo">
                                 <h4>{{ $game->title }}</h4>
-                                <p>{{ $game->developer }}</p>
-                                <p>{{ $game->releasedate }}</p>
                             </div>
+                            <div class="parrafo_modulo">
+                                <p>{{ $game->genre }}</p>
+                            </div>
+                        </div>
+                        <div class="boton_view_dash">
+                            <!-- Botón de ver -->
+                            <a href="{{ route('collection.show', $game->id) }}" class="btn btn-explore">
+                                <i class="fa-regular fa-eye icon-white icon-thin"></i>
+                            </a>
+
+                            <!-- Botón de eliminar -->
+                            <a href="{{ route('collection.delete', $game->id) }}" class="btn btn-delete">
+                                <i class="fa-regular fa-trash-can icon-white icon-thin"></i> <!-- Icono de eliminar -->
+                            </a>
                         </div>
                     </section>
                 @endforeach

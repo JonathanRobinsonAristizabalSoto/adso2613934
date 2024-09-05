@@ -100,6 +100,9 @@ Route::middleware('auth')->group(function () {
     // Ruta de la colección
     // ====================
     Route::get('/collection', [CollectionController::class, 'index'])->name('collection.index');
+    Route::get('/collection/{id}', [CollectionController::class, 'show'])->name('collection.show');
+    Route::get('/collection/{id}/delete', [CollectionController::class, 'delete'])->name('collection.delete');
+    Route::delete('/collection/{id}', [CollectionController::class, 'destroy'])->name('collection.destroy');
 });
 
 // ====================
