@@ -11,7 +11,7 @@
             <a href="{{ url('games') }}">
                 <img class="icoback-gamer" src="{{ asset('images/btn_back.png') }}" alt="Back Button">
             </a>
-            <img class="logotitulo-gamers" src="{{ asset('images/logo_show.svg') }}" alt="Logo">
+            <img class="logotitulo-gamer" src="{{ asset('images/logo_show.svg') }}" alt="Logo">
             @include('includes.burger-menu')
         </section>
     </header>

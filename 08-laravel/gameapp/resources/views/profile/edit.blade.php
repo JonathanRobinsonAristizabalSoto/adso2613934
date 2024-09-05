@@ -14,7 +14,7 @@
                 <img class="icoback-users" src="{{ asset('images/btn_back.png') }}" alt="Back Button">
             </a>
             <!-- Logo del encabezado -->
-            <img class="logotitulo-users" src="{{ asset('images/logo-cabecera_users_edit.svg') }}" alt="Logo">
+            <img class="logotitulo-edit-profile" src="{{ asset('images/logotitulo-edit-profile.svg') }}" alt="Logo">
 
             <!-- Incluir Menú hamburguesa -->
             @include('includes.burger-menu')

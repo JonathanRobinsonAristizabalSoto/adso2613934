@@ -31,9 +31,4 @@ class Game extends Model
     public function category() {
         return $this->belongsTo('App\Models\Category');
     }
-
-    // Relationship: Game belongs to collection
-    public function collection() {
-        return $this->belongsTo('App\Models\Collection');
-    }
 }

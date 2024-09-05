@@ -44,9 +44,9 @@
                     My Profile
                 </a>
                 <hr>
-                <a href="{{ route('dashboard.user') }}">
+                <a href="{{ route('dashboard') }}">
                     <img src="{{ asset('images/ico-conf.png') }}" alt="Dashboard User Icon">
-                My Dashboard
+                Dashboard
                 </a>
                 <hr>
                 <!-- Formulario para cerrar sesión -->

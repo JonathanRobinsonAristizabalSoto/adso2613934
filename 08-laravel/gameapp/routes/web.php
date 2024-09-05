@@ -6,7 +6,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\GameController;
+use App\Http\Controllers\UserDashboardController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CollectionController;
 
 // ====================
 // Rutas de vistas
@@ -93,7 +95,17 @@ Route::middleware('auth')->group(function () {
         Route::post('/search', [GameController::class, 'search'])->name('games.search'); // Ruta de búsqueda
         Route::get('/{game}/delete', [GameController::class, 'delete'])->name('games.delete'); // Ruta de eliminación corregida
     });
+
+    // ====================
+    // Ruta de la colección
+    // ====================
+    Route::get('/collection', [CollectionController::class, 'index'])->name('collection.index');
 });
+
+// ====================
+// Ruta del dashboard del usuario
+// ====================
+Route::get('/dashboard-user', [UserDashboardController::class, 'index'])->name('dashboard.user');
 
 // ====================
 // Cargar rutas de autenticación

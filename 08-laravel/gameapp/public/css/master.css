@@ -445,6 +445,14 @@ main.cuerpo {
         padding: 0px 20px 0px 40px;
     }
 
+    .logotitulo-profile {
+        padding: 0px 20px 0px 25px;
+    }
+
+    .logotitulo-edit-profile {
+        padding: 0px 0px 0px 20px;
+    }
+
     .logotitulo-status {
         padding: 0px 40px 0px 60px;
     }
@@ -454,11 +462,11 @@ main.cuerpo {
     }
 
     .logotitulo-gamer {
-        padding: 0px 100px 0px 70px;
+        padding: 0px 45px 0px 85px;
     }
 
     .logotitulo-gamers {
-        padding: 0px 40px 0px 90px;
+        padding: 0px 40px 0px 70px;
     }
 
     .logotitulo-show {
